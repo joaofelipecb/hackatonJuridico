@@ -1,7 +1,11 @@
 <?php
-require_once(__DIR__.'/24-control/Login.php');
-require_once(__DIR__.'/24-control/Menu.php');
-\Hackaton\Control\Login::redirect_if_not_logged();
+require_once(__DIR__.'/include.php');
+try{
+	\Hackaton\Control\Login::assert_user_is_allowed_action('conflits.php');
+}
+catch(\Hackaton\Except\UserForbiden $e){
+	header('Location: user_forbiden.php');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,6 +20,13 @@ require_once(__DIR__.'/24-control/Menu.php');
 		echo \Hackaton\Control\Menu::present_html();
 		?>
 	</nav>
-	
+	<article>
+		<h2>Conflitos</h2>
+		<?php
+		$conflitsData = new \Hackaton\Data\Conflits();
+		$conflits = $conflitsData->select();
+		echo \Hackaton\Control\HTMLTable::present($conflits);
+		?>
+	</article>
 </body>
 </html>
