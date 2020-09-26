@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__.'/24-control/Login.php');
+require_once(__DIR__.'/24-control/Menu.php');
 \Hackaton\Control\Login::redirect_if_not_logged();
 ?>
 <!DOCTYPE html>
@@ -11,8 +12,9 @@ require_once(__DIR__.'/24-control/Login.php');
 <body>
 	<h1>Desjudicializa!</h1>
 	<nav>
-		<div>Processos</div>
-		<div>Rob&ocirc;</div>
+		<?php
+		echo \Hackaton\Control\Menu::present_html();
+		?>
 	</nav>
 	
 </body>

@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__.'/24-control/Login.php');
+require_once(__DIR__.'/include.php');
 \Hackaton\Control\Login::redirect_if_logged();
 ?>
 <!DOCTYPE html>
