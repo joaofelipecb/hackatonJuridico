@@ -10,6 +10,6 @@ class DatabaseConnectionMysql{
 		$link = mysqli_connect($host,$user,$password,$dbname);
 		if(!$link)
 			throw new \Hackaton\Except\DatabaseConnectionException();
-		return new \Hackaton\Struct\DatabaseConnectionInitiedMysql($host,$user,$password,$dbname,$link);
+		return new \Hackaton\Develop\DatabaseConnectionInitiedMysql($host,$user,$password,$dbname,$link);
 	}
 }
