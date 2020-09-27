@@ -6,12 +6,13 @@ class Conflits{
 		$connection = Database::get_connection();
 		$connectionInitied = \Hackaton\Control\DatabaseConnection::connect($connection);
 		$query = <<<HEREDOC
-SELECT conflit_id, conflit_status
+SELECT conflit_id as id, conflit_status as status
 FROM conflits
 LIMIT 25;
 HEREDOC;
 		$result = \Hackaton\Command\Database::query($connectionInitied, $query);
-		$conflicts = \Hackaton\Control\Database::fetch($result,'\Hackaton\Struct\Conflits');
+		$class = new \Hackaton\Develop\ClassValidInsertable('\\Hackaton\\Struct\\Conflits');
+		$conflicts = \Hackaton\Control\Database::fetch($result,$class);
 		return $conflicts;
 	}
 }

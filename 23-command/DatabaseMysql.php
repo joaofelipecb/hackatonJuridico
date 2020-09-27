@@ -7,6 +7,6 @@ class DatabaseMysql{
 		$result = mysqli_query($link,$query);
 		if(!$result)
 			throw new \Hackaton\Except\DatabaseQueryException();
-		return $result;
+		return new \Hackaton\Develop\DatabaseResultMysql($result);
 	}
 }
