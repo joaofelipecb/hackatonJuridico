@@ -9,7 +9,16 @@ class IADemandasRepetitivas{
 		$command .= ' '.$conflit->get_cod_assunto();
 		$command .= ' '.$conflit->get_valor();
 		$command .= ' '.($conflit->get_processo_prioritario()=='S'?1:0);
-		$result = str_replace(' NULL','',passthru($command));
+		ob_start();
+		passthru($command);
+		$result = ob_get_contents();
+		ob_end_clean();
+		$result = str_replace(' NULL','',$result);
+		$parts = explode("\n",$result);
+		$demand_id = trim($parts[0]);
+		$demand_repeatable = trim($parts[1]);
+		$demand = \Hackaton\Data\Demands::get_by_id($demand_id);
+		echo $demand_id."\n".$demand_repeatable."\n".$demand->get_name()."\n";
 	}
 }
 IADemandasRepetitivas::call($_GET['id']);
