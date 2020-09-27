@@ -32,4 +32,14 @@ class Database{
 			$insertable->insert(self::assoc($row, $innerClassParameters, $types, $innerClassName));
 		return $insertable;
 	}
+	static function get(\Hackaton\Develop\DatabaseResult $result, \Hackaton\Develop\ClassValid $class){
+		$className = $class->get_className();
+		$resultMysql = $result->get_resource();
+		$row = mysqli_fetch_assoc($resultMysql);
+		if(is_null($row))
+			throw new \Hackaton\Except\NotFound('by id',$className);
+		$row = array_values($row);
+		$object = new $className(...$row);
+		return $object;
+	}
 }

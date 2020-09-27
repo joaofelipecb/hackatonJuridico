@@ -3,7 +3,7 @@ namespace Hackaton\Data;
 require_once(__DIR__.'/../include.php');
 class LoginJudicial extends Login{
 	static function get_actions_allowed(){
-		return array('home.php','conflits.php','bots.php');
+		return array('home.php','conflits.php','conflit.php','bots.php');
 	}
 	static function get_menu_list(){
 		return array(

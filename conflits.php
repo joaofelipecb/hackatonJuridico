@@ -28,7 +28,15 @@ catch(\Hackaton\Except\UserForbiden $e){
 		<?php
 		$conflitsData = new \Hackaton\Data\Conflits();
 		$conflits = $conflitsData->select();
-		echo \Hackaton\Control\HTMLTable::present($conflits);
+		$options = array();
+		$options['headerAlias'] = array('id'=>'ID',
+										'cod_classe_processual'=>'Cod. Classe Processual',
+										'cod_assunto'=>'Cod. Assunto',
+										'valor'=>'Valor',
+										'processo_prioritario'=>'Processo Priorit&aacute;rio',
+										'status'=>'Status');
+		$options['action'] = 'conflit.php?id=';
+		echo \Hackaton\Control\HTMLTable::present($conflits,$options);
 		?>
 	</div>
 	</div>
