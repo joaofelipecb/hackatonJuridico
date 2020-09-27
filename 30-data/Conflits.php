@@ -6,7 +6,8 @@ class Conflits{
 		$connection = Database::get_connection();
 		$connectionInitied = \Hackaton\Control\DatabaseConnection::connect($connection);
 		$query = <<<HEREDOC
-SELECT conflit_id as id, conflit_status as status
+SELECT conflit_id as id, conflit_cod_classe_processual as cod_classe_processual, conflit_cod_assunto as cod_assunto,
+       conflit_valor as valor, conflit_processo_prioritario as processo_prioritario, conflit_status as status
 FROM conflits
 LIMIT 25;
 HEREDOC;

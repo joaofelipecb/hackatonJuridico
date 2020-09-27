@@ -4,7 +4,7 @@ require_once(__DIR__.'/../include.php');
 class Conflits implements \Hackaton\Interfac\Table, \Hackaton\Interfac\Insertable{
 	private $list;
 	static function get_header(){
-		return array('id','status');
+		return array('id','cod_classe_processual','cod_assunto','valor','processo_prioritario','status');
 	}
 	function get_rows(){
 		return $this->list;
@@ -13,7 +13,7 @@ class Conflits implements \Hackaton\Interfac\Table, \Hackaton\Interfac\Insertabl
 		return 'Hackaton\\Struct\\Conflit';
 	}
 	static function get_innerClassParameters(){
-		return array('id','status');
+		return array('id','cod_classe_processual','cod_assunto','valor','processo_prioritario','status');
 	}
 	function __construct(){
 		$this->list = array();

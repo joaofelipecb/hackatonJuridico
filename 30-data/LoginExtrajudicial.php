@@ -7,7 +7,7 @@ class LoginExtrajudicial extends Login{
 	}
 	static function get_menu_list(){
 		return array(
-			new \Hackaton\Struct\MenuItem('Robos','bots.php'),
+			new \Hackaton\Struct\MenuItem('Rob&ocirc;s','bots.php'),
 			new \Hackaton\Struct\MenuItem('Sair','logout.php')
 		);
 	}

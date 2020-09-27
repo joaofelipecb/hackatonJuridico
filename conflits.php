@@ -10,23 +10,27 @@ catch(\Hackaton\Except\UserForbiden $e){
 <!DOCTYPE html>
 <html>
 <head>
-	<style link="style.css" rel="stylesheet"></style>
-	<title>Desjudicializa!</title>
+	<link href="30-data/style.css" rel="stylesheet"></style>
+	<title>Desjudica</title>
 </head>
 <body>
-	<h1>Desjudicializa!</h1>
-	<nav>
-		<?php
-		echo \Hackaton\Control\Menu::present_html();
-		?>
-	</nav>
-	<article>
-		<h2>Conflitos</h2>
+	<header>
+		<div class="logo">DES<span class="logodetail">JUDICA</span></div>
+		<nav>
+			<?php
+			echo \Hackaton\Control\Menu::present_html();
+			?>
+		</nav>
+	</header>
+	<div class="bigboxborder">
+	<div class="bigbox">
+		<div class="title">Conflitos</div>
 		<?php
 		$conflitsData = new \Hackaton\Data\Conflits();
 		$conflits = $conflitsData->select();
 		echo \Hackaton\Control\HTMLTable::present($conflits);
 		?>
-	</article>
+	</div>
+	</div>
 </body>
 </html>
