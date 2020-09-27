@@ -4,7 +4,7 @@ from numpy import random
 from sklearn.cluster import KMeans
 
 random.seed(1234);
-fileName = '../30-data/output_JFRN.csv'
+fileName = '..\\30-data\\output_JFRN.csv'
 df = pd.read_csv(fileName)
 rec = df[['CÃ³digo da classe processual','CÃ³digo do Assunto','Valor da Causa','Processo PrioritÃ¡rio']]
 rec = rec.dropna()
@@ -14,7 +14,7 @@ model = KMeans(n_clusters=500)
 model.fit(rec)
 codClasseProcessual = int(sys.argv[1])
 codAssunto = int(sys.argv[2])
-valor = int(sys.argv[3])
+valor = float(sys.argv[3])
 processoPrioritario = int(sys.argv[4])
 predicao = model.predict([[codClasseProcessual,codAssunto,valor,processoPrioritario]])[0]
 print(predicao)

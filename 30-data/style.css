@@ -117,10 +117,20 @@ label.big{
 	font-size:18pt;
 	font-family:helvetica;
 }
+label.medium{
+	font-size:14pt;
+	font-family:helvetica;
+}
 input.big{
 	margin-top:6px;
 	width:370px;
 	font-size:20pt;
+	padding:10px;
+}
+input.medium{
+	margin-top:6px;
+	width:270px;
+	font-size:16pt;
 	padding:10px;
 }
 input.bigbutton{
@@ -141,4 +151,13 @@ a.big{
 }
 a.big:hover{
 	text-decoration:underline;
+}
+.mtable{
+	display:table;
+}
+.mtr{
+	display:table-row;
+}
+.mtd{
+	display:table-cell;
 }
