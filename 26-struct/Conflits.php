@@ -10,7 +10,7 @@ class Conflits implements \Hackaton\Interfac\Table, \Hackaton\Interfac\Insertabl
 		return $this->list;
 	}
 	static function get_innerClassName(){
-		return '\Hackaton\Struct\Conflit';
+		return 'Hackaton\\Struct\\Conflit';
 	}
 	static function get_innerClassParameters(){
 		return array('id','status');
@@ -19,7 +19,7 @@ class Conflits implements \Hackaton\Interfac\Table, \Hackaton\Interfac\Insertabl
 		$this->list = array();
 	}
 	function insert($item){
-		\Hackaton\Control\Clas::assert_instanceOf($item, self::get_innerClassName());
+		\Hackaton\Control\Clas::assert_instanceOf(get_class($item), self::get_innerClassName());
 		$this->list[] = $item;
 	}
 }

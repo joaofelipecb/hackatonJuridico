@@ -5,6 +5,6 @@ class ClassConstraintException extends \Exception{
 	private $className;
 	function __construct($className){
 		$this->className = $className;
-		parent::__construct('Class '.$className.' does not exists');
+		parent::__construct('Class '.$className.' exception');
 	}
 }

@@ -7,7 +7,8 @@ class Clas{
 			throw new \Hackaton\Except\ClassNotExists($className);
 	}
 	static function assert_instanceOf(string $className, string $baseClassName){
-		if(!is_subclass_of($className,$baseClassName))
+		if(!is_subclass_of($className,$baseClassName)
+		&& $className !== $baseClassName)
 			throw new \Hackaton\Except\ClassConstraintException($className);
 	}
 }
