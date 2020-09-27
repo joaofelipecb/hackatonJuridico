@@ -36,11 +36,13 @@ $conflitId = intVal($_GET['id']);
 		<div class="title">Conflito</div>
 		<?php
 		$conflit = \Hackaton\Data\Conflits::get_by_id($conflitId);
+		$subject = \Hackaton\Data\Subjects::get_by_id($conflit->get_cod_assunto());
+		$processClass = \Hackaton\Data\ProcessClasses::get_by_id($conflit->get_cod_classe_processual());
 		?>
 		<div class="margin">
 		<span class="big"><b>ID:</b> <?=$conflit->get_id()?></span><br />
-		<span class="big"><b>Cod. Classe Processual:</b> <?=$conflit->get_cod_classe_processual()?></span><br />
-		<span class="big"><b>Cod. Assunto:</b> <?=$conflit->get_cod_assunto()?></span><br />
+		<span class="big"><b>Cod. Classe Processual:</b> <?=$conflit->get_cod_classe_processual()?> - <?=$processClass->get_name()?></span><br />
+		<span class="big"><b>Cod. Assunto:</b> <?=$conflit->get_cod_assunto()?> - <?=$subject->get_name()?></span><br />
 		<span class="big"><b>Valor:</b> <?=$conflit->get_valor()?></span><br />
 		<span class="big"><b>Processo Priorit&aacute;rio:</b> <?=$conflit->get_processo_prioritario()?></span><br />
 		<span class="big"><b>Status:</b> <?=$conflit->get_status()?></span><br />

@@ -1,17 +1,17 @@
 <?php
 namespace Hackaton\Data;
 require_once(__DIR__.'/../include.php');
-class Demands{
+class Subjects{
 	function get_by_id(int $id){
 		$connection = Database::get_connection();
 		$connectionInitied = \Hackaton\Control\DatabaseConnection::connect($connection);
 		$query = <<<HEREDOC
-SELECT demand_id as id, demand_name as name
-FROM demands
-WHERE demand_id = $id;
+SELECT subject_id as id, subject_name as name
+FROM subjects
+WHERE subject_id = $id;
 HEREDOC;
 		$result = \Hackaton\Command\Database::query($connectionInitied, $query);
-		$class = new \Hackaton\Develop\ClassValid('\\Hackaton\\Struct\\Demand');
+		$class = new \Hackaton\Develop\ClassValid('\\Hackaton\\Struct\\Subject');
 		$conflicts = \Hackaton\Control\Database::get($result,$class);
 		return $conflicts;
 	}
