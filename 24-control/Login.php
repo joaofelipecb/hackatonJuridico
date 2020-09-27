@@ -43,20 +43,12 @@ class Login{
 			return;
 		throw new \Hackaton\Except\LoginInvalid($user);
 	}
-	static function redirect_if_logged(){
-		if(self::is_logged())
-			header('Location: home.php');
-	}
-	static function redirect_if_not_logged(){
-		if(!self::is_logged())
-			header('Location: index.php');
-	}
 	static function get_menu_list_by_role(){
-		if(!self::is_logged())
-			return array();
-		if($_COOKIE['login'] === 'judicial')
-			return \Hackaton\Data\Login::get_menu_list_judicial();
-		else if($_COOKIE['login'] === 'extrajudicial')
-			return \Hackaton\Data\Login::get_menu_list_extrajudicial();
+		$login = self::get_login_if_logged();
+		if($login instanceOf \Hackaton\Develop\LoginJudicial)
+			return \Hackaton\Data\LoginJudicial::get_menu_list();
+		else if($login instanceOf \Hackaton\Develop\LoginExtrajudicial)
+			return \Hackaton\Data\LoginExtrajudicial::get_menu_list();
+		throw new \Hackaton\Except\NotFound(get_class($login),'\Hackaton\Data');
 	}
 }

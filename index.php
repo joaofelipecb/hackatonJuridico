@@ -1,37 +1,42 @@
 <?php
 require_once(__DIR__.'/include.php');
-\Hackaton\Control\Login::redirect_if_logged();
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<style link="style.css" rel="stylesheet"></style>
-	<title>Desjudicializa!</title>
+	<link href="30-data/style.css" rel="stylesheet"></style>
+	<title>Desjudica</title>
 </head>
 <body>
-	<h1>Desjudicializa!</h1>
-	<?php
-	if(isset($_GET['loginError'])){ ?>
-	<div class="error">
+	<header>
+		<div class="logo">DES<span class="logodetail">JUDICA</span></div>
+	</header>
+	<div class="smallboxborder">
+	<div class="smallbox">
+		<div class="title">Acessar sua conta <span class="logostyle">DESJUDICA</span></div>
+		<?php
+		if(isset($_GET['loginError'])){ ?>
+		<div class="error">
 Login incorreto, tente novamente.	
-	</div>
-	<?php }
-	?>
-	<form action="login.php" method="post">
-		<div class="table">
-			<div class="tr>
-				<div class="td"><label for="">usu&aacute;rio:</label></div>
-				<div class="td"><input name="user"></div>
-			</div>
-			<div class="tr">
-				<div class="td"><label for="">senha:</label></div>
-				<div class="td"><input name="pass" type="password"></div>
-			</div>
-			<div class="tr">
-				<div class="td"></label></div>
-				<div class="td"><input type="submit"></div>
-			</div>
 		</div>
-	</form>
+		<?php } ?>
+		<form action="login.php" method="post">
+			<div>
+				<div class="spaced">
+					<div><label for="" class="big">usu&aacute;rio:</label></div>
+					<div><input name="user" class="big"></div>
+				</div>
+				<div class="spaced">
+					<div><label for="" class="big">senha:</label></div>
+					<div><input name="pass" type="password" class="big"></div>
+				</div>
+				<div class="spaced">
+					<div></div>
+					<div><input class="bigbutton" type="submit" style="margin-left:123px;"></div>
+				</div>
+			</div>
+		</form>
+	</div>
+	</div>
 </body>
 </html>

@@ -10,16 +10,26 @@ catch(\Hackaton\Except\UserForbiden $e){
 <!DOCTYPE html>
 <html>
 <head>
-	<style link="style.css" rel="stylesheet"></style>
-	<title>Desjudicializa!</title>
+	<link href="30-data/style.css" rel="stylesheet"></style>
+	<title>Desjudica</title>
 </head>
 <body>
-	<h1>Desjudicializa!</h1>
-	<nav>
+	<header>
+		<div class="logo">DES<span class="logodetail">JUDICA</span></div>
+		<nav>
+			<?php
+			//echo \Hackaton\Control\Menu::present_html();
+			?>
+		</nav>
+	</header>
+	<div class="smallboxborder">
+	<div class="smallbox">
 		<?php
-		echo \Hackaton\Control\Menu::present_html();
-		?>
-	</nav>
-	
+			$menuList = \Hackaton\Control\Login::get_menu_list_by_role();
+			foreach($menuList as $menu){ ?>
+				<div class="spaced"><a class="big" href="<?=$menu->get_action()?>"><?=$menu->get_name()?></a></div>
+			<?php } ?>
+	</div>
+	</div>	
 </body>
 </html>
