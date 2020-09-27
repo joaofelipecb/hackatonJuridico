@@ -50,7 +50,7 @@ HEREDOC;
 UPDATE conflits
 SET
 	conflit_status = 'desclassificado'
-WHERE conflit_id = $id;
+WHERE conflit_id = $conflit_id;
 HEREDOC;
 		\Hackaton\Command\Database::query($connectionInitied, $query);
 	}
