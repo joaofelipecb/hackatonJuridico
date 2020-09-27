@@ -89,6 +89,9 @@ div.bigbox table tr:nth-child(odd){
 div.bigbox table tr:nth-child(even){
 	background-color:#f0e7ff;
 }
+.margin{
+	margin:20px;
+}
 div.smallbox div.title{
 	font-family:segoe ui;
 	font-size:20pt;
@@ -105,6 +108,10 @@ div.bigbox div.title{
 }
 div.spaced{
 	margin-top:20px;
+}
+span.big{
+	font-size:14pt;
+	font-family:helvetica;
 }
 label.big{
 	font-size:18pt;
