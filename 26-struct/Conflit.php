@@ -9,7 +9,8 @@ class Conflit{
 	private $processo_prioritario;
 	private $status;
 	private $demand_id;
-	function __construct(int $id, int $cod_classe_processual, int $cod_assunto, float $valor, string $processo_prioritario, string $status, $demand_id=null){
+	private $draw;
+	function __construct(int $id, int $cod_classe_processual, int $cod_assunto, float $valor, string $processo_prioritario, string $status, $demand_id=null, $draw=null){
 		$this->id = $id;
 		$this->cod_classe_processual = $cod_classe_processual;
 		$this->cod_assunto = $cod_assunto;
@@ -17,6 +18,7 @@ class Conflit{
 		$this->processo_prioritario = $processo_prioritario;
 		$this->status = $status;
 		$this->demand_id = $demand_id;
+		$this->draw = $draw;
 	}
 	function get_id(){
 		return $this->id;
@@ -38,5 +40,8 @@ class Conflit{
 	}
 	function get_demand_id(){
 		return $this->demand_id;
+	}
+	function get_draw(){
+		return $this->draw;
 	}
 }

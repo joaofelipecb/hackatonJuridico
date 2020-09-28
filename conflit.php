@@ -75,9 +75,11 @@ function jurimetria_callback(data){
 	var jurimetriaImprocedente = document.getElementById('jurimetriaImprocedente');
 	var jurimetriaParcial = document.getElementById('jurimetriaParcial');
 	var jurimetriaProcedente = document.getElementById('jurimetriaProcedente');
+	var jurimetriaDraw = document.getElementById('jurimetriaDraw');
 	jurimetriaImprocedente.innerHTML = (parseFloat(parts[0].trim())*100)+'%';
 	jurimetriaParcial.innerHTML = (parseFloat(parts[1].trim())*100)+'%';
 	jurimetriaProcedente.innerHTML = (parseFloat(parts[2].trim())*100)+'%';
+	jurimetriaDraw.value = parts[0].trim()+';'+parts[1].trim()+';'+parts[2].trim();
 }
 	</script>
 </head>
@@ -138,7 +140,7 @@ function jurimetria_callback(data){
 		</div>
 		<?php
 }
-else if($conflit->get_demand_id() != null){
+else if($conflit->get_status() == 'classificado'){
 		$demand = \Hackaton\Data\Demands::get_by_id($conflit->get_demand_id()); ?>
 		<div class="margin">
 			<span class="medium"><b>C&oacute;digo da Demanda:</b> <?= $demand->get_id() ?> </span><br/>
@@ -153,6 +155,9 @@ else if($conflit->get_demand_id() != null){
 		</div>
 		</div>
 		<div id="jurimetriaForm" style="display:none;width:100%;">
+		<form action="conflitDraw.php" method="post">
+		<input name='conflit_id' type="hidden" value="<?=$conflit->get_id()?>">
+		<input type="hidden" id="jurimetriaDraw" name="draw">
 		<table>
 			<tr>
 				<th>Senten&ccedil;a</th>
@@ -171,7 +176,67 @@ else if($conflit->get_demand_id() != null){
 				<td id="jurimetriaProcedente">0%</td>
 			</tr>
 		</table>
-		<input class="medium" type="submit" name='unclassify' value="sortear" style="margin-left:415px;">
+		<input class="medium" type="submit" value="sortear" style="margin-left:415px;">
+		</form>
+		</div>
+<?php }
+else if($conflit->get_status() == 'sorteado'){
+	$demand = \Hackaton\Data\Demands::get_by_id($conflit->get_demand_id());	?>
+		<div class="margin">
+			<span class="medium"><b>C&oacute;digo da Demanda:</b> <?= $demand->get_id() ?> </span><br/>
+			<span class="medium"><b>Descri&ccedil;&atilde;o da Demanda:</b> <?= $demand->get_name() ?> </span><br/>
+			<span class="medium"><b>Demanda Repetitiva:</b> sim </span><br/>
+		</div>
+		<br/>
+		<div class="title">Etapa 2 - Jurimetria da Demanda Repetitiva para o Caso</div>
+		<div class="margin">
+			<span class="medium"><b>Sorteio:</b> <?= $conflit->get_draw() ?> </span><br/>
+		</div>
+		<br/>
+		<div class="title">Etapa 3 - Discurso Juridico Robotizado</div>
+		<?php
+		$bots = \Hackaton\Data\Bots::select()->get_list();
+		$results = array(array(),array(),array());
+		foreach($bots as $bot){
+			$code = $bot->get_code();
+			ob_start();
+			eval($code);
+			$result = intVal(ob_get_contents());
+			ob_end_clean();
+			$results[$result][] = $bot->get_name();
+		}
+		?>
+		<table>
+			<tr>
+				<th>Senten&ccedil;a</th>
+				<th>Probabilidade</th>
+			</tr>
+			<tr>
+				<td><?=($conflit->get_draw()=='improcedente'?'Improcedente':'')?></td>
+				<td id="jurimetriaImprocedente"><?=join(', ',$results[0])?></td>
+			</tr>
+			<tr>
+				<td><?=($conflit->get_draw()=='parcial'?'Parcial':'')?></td>
+				<td id="jurimetriaParcial"><?=join(', ',$results[1])?></td>
+			</tr>
+			<tr>
+				<td><?=($conflit->get_draw()=='procedente'?'Procedente':'')?></td>
+				<td id="jurimetriaProcedente"><?=join(', ',$results[2])?></td>
+			</tr>
+		</table>
+		<div class="margin">
+		<p>
+		<?php
+		if(($conflit->get_draw()=='improcedente'
+		&& count($results[0])==0)
+		|| ($conflit->get_draw()=='parcial'
+		&& count($results[1])==0)
+		|| ($conflit->get_draw()=='procedente'
+		&& count($results[2])==0)){
+			echo 'O discurso robotizado n&atilde;o encontrou um justificativa razo&aacute;te para o resultado da Intelig&ecirc;ncia Artificial. Isso pode indiciar um vi&eacute;s nos dados que treinaram a intelig&ecirc;ncia e portanto o caso n&atilde;o poder&aacute; ser desjudicializado nessa ferramenta.';
+		}
+		?>
+		</p>
 		</div>
 <?php } ?>
 		</div>
