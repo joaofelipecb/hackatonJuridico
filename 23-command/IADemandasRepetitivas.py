@@ -4,7 +4,7 @@ from numpy import random
 from sklearn.cluster import KMeans
 
 random.seed(1234);
-fileName = '..\\30-data\\output_JFRN.csv'
+fileName = '..\\30-data\\JFRNNaoSupervisionado.csv'
 df = pd.read_csv(fileName)
 rec = df[['CÃ³digo da classe processual','CÃ³digo do Assunto','Valor da Causa','Processo PrioritÃ¡rio']]
 rec = rec.dropna()
